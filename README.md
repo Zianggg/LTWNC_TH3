@@ -109,7 +109,7 @@ Vì vậy dự án bảo vệ nhiều lớp (defense in depth):
 | A2. Id không tồn tại hiện 404 của dự án | `notFound()` trong các page + `src/app/not-found.tsx` (trả HTTP 404) |
 | B1. Route group `(public)` và `(app)`, mỗi nhóm một layout | `src/app/(public)/layout.tsx`, `src/app/(app)/layout.tsx` |
 | B2. `/dashboard` có sidebar lồng nhau, tô sáng trang hiện tại | `src/app/(app)/dashboard/layout.tsx`, `src/components/dashboard-nav.tsx` (`usePathname`, `aria-current`) |
-| B3. loading, error ("Thử lại"), not-found | `src/app/(app)/loading.tsx`, `src/app/(public)/error.tsx`, `src/app/(app)/error.tsx`, `src/app/not-found.tsx` |
+| B3. loading, error ("Thử lại"), not-found | `src/app/(app)/admin/loading.tsx` (+ chấm "đang tải" trên sidebar dashboard bằng `useLinkStatus`), `src/app/(public)/error.tsx`, `src/app/(app)/error.tsx`, `src/app/not-found.tsx` |
 | B4. Mặc định Server Component, `'use client'` chỉ khi cần | Client: `countdown.tsx`, `deadline-filter.tsx`, `next-up.tsx`, `dashboard-nav.tsx`, `header/user-menu.tsx`, `login-form.tsx`, `toggle-done-button.tsx`, `admin/*`, `providers.tsx`, `error.tsx` |
 | C1. NextAuth Credentials, session JWT | `src/auth.config.ts` (`strategy: "jwt"`), `src/auth.ts`, `src/app/api/auth/[...nextauth]/route.ts` |
 | C2. id và role trong session, kiểu đầy đủ | `src/types/next-auth.d.ts` (`Role = "admin" \| "user"`), callbacks `jwt` / `session` |

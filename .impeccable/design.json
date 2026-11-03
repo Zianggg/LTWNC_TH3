@@ -1,0 +1,103 @@
+{
+  "schemaVersion": 2,
+  "generatedAt": "2026-11-03T07:45:00.000Z",
+  "title": "Design System: Class Deadline Hub",
+  "extensions": {
+    "colorMeta": {
+      "ink": { "role": "primary", "displayName": "Mực xanh than", "canonical": "#172036", "tonalRamp": ["#0b1020", "#172036", "#2a3654", "#3b4a6b", "#5b6478", "#8a91a0", "#c9cfdc", "#eef0f5"] },
+      "paper": { "role": "neutral", "displayName": "Giấy lạnh", "canonical": "#f6f7fa" },
+      "overdue-red": { "role": "secondary", "displayName": "Đỏ trễ hạn", "canonical": "#c4161c" },
+      "soon-amber": { "role": "secondary", "displayName": "Hổ phách sắp đến", "canonical": "#8f4207" },
+      "later-teal": { "role": "secondary", "displayName": "Mòng két còn xa", "canonical": "#0f766e" },
+      "night-paper": { "role": "neutral", "displayName": "Giấy đêm", "canonical": "#0f1524" }
+    },
+    "typographyMeta": {
+      "display": { "displayName": "Display", "purpose": "Chỉ câu tiêu đề trang chủ." },
+      "date-numeral": { "displayName": "Số ngày", "purpose": "Cột ngày bên lề và mọi số liệu thời gian (tabular)." }
+    },
+    "shadows": [],
+    "motion": [
+      { "name": "color-transition", "value": "150ms ease-out", "purpose": "Đổi màu nền/viền khi hover; tắt nhấp nháy khi prefers-reduced-motion." }
+    ],
+    "breakpoints": [
+      { "name": "min-420", "value": "420px" },
+      { "name": "sm", "value": "640px" },
+      { "name": "lg", "value": "1024px" }
+    ]
+  },
+  "components": [
+    {
+      "name": "Primary Button",
+      "kind": "button",
+      "refersTo": "button-primary",
+      "description": "Hành động chính duy nhất của một khối.",
+      "html": "<button class=\"ds-btn-primary\">Đánh dấu đã xong</button>",
+      "css": ".ds-btn-primary{background:#172036;color:#f6f7fa;border:1px solid transparent;border-radius:8px;height:32px;padding:0 10px;font:500 14px 'Be Vietnam Pro',system-ui,sans-serif;cursor:pointer;transition:background .15s ease-out}.ds-btn-primary:hover{background:#2a3654}.ds-btn-primary:focus-visible{outline:3px solid #3b4a6b80;outline-offset:1px}"
+    },
+    {
+      "name": "Outline Button",
+      "kind": "button",
+      "refersTo": "button-outline",
+      "description": "Hành động phụ.",
+      "html": "<button class=\"ds-btn-outline\">Đăng xuất</button>",
+      "css": ".ds-btn-outline{background:#fff;color:#172036;border:1px solid #dde1ea;border-radius:8px;height:32px;padding:0 10px;font:500 14px 'Be Vietnam Pro',system-ui,sans-serif;cursor:pointer}.ds-btn-outline:hover{background:#e9ecf3}.ds-btn-outline:focus-visible{outline:3px solid #3b4a6b80}"
+    },
+    {
+      "name": "Countdown Pill",
+      "kind": "chip",
+      "refersTo": "countdown-pill-soon",
+      "description": "Nhãn còn bao nhiêu ngày, màu theo trạng thái.",
+      "html": "<span class=\"ds-pill ds-soon\">Còn 2 ngày</span> <span class=\"ds-pill ds-overdue\">Quá hạn 3 ngày</span> <span class=\"ds-pill ds-later\">Còn 9 ngày</span>",
+      "css": ".ds-pill{display:inline-flex;align-items:center;justify-content:center;height:28px;min-width:112px;padding:0 12px;border-radius:9999px;font:600 12px 'Be Vietnam Pro',system-ui,sans-serif;font-variant-numeric:tabular-nums}.ds-soon{background:#8f42071a;color:#8f4207}.ds-overdue{background:#c4161c1a;color:#c4161c}.ds-later{background:#0f766e1a;color:#0f766e}"
+    },
+    {
+      "name": "Deadline Row",
+      "kind": "card",
+      "refersTo": "deadline-row",
+      "description": "Một dòng trong sổ: cột ngày, nội dung, đếm ngược.",
+      "html": "<article class=\"ds-row\"><time class=\"ds-date\"><b>10</b><small>Tháng 11</small></time><div><p class=\"ds-subj\"><i></i>Lập trình Web nâng cao</p><h3>BTTH 3: Class Deadline Hub</h3></div><span class=\"ds-pill ds-later\">Còn 7 ngày</span></article>",
+      "css": ".ds-row{display:grid;grid-template-columns:5rem 1fr auto;gap:16px;align-items:center;background:#fff;border:1px solid #dde1ea;border-radius:8px;padding:16px;font-family:'Be Vietnam Pro',system-ui,sans-serif;color:#172036}.ds-row:hover{border-color:#3b4a6b66}.ds-date{display:flex;flex-direction:column;align-items:center;border-right:1px solid #dde1ea;padding-right:16px}.ds-date b{font-size:30px;line-height:1;font-variant-numeric:tabular-nums}.ds-date small{font-size:12px;color:#5b6478;margin-top:4px}.ds-subj{display:flex;gap:8px;align-items:center;margin:0;font-size:14px;color:#5b6478}.ds-subj i{width:10px;height:10px;border-radius:50%;background:#2563eb}.ds-row h3{margin:4px 0 0;font-size:16px;font-weight:600}.ds-pill{display:inline-flex;align-items:center;justify-content:center;height:28px;min-width:112px;border-radius:9999px;font-size:12px;font-weight:600}.ds-later{background:#0f766e1a;color:#0f766e}"
+    },
+    {
+      "name": "Text Input",
+      "kind": "input",
+      "refersTo": "input-field",
+      "description": "Ô nhập của form đăng nhập và thêm deadline.",
+      "html": "<input class=\"ds-input\" placeholder=\"ten@ptit.edu.vn\">",
+      "css": ".ds-input{background:#fff;color:#172036;border:1px solid #cfd5e1;border-radius:6.4px;height:36px;padding:0 10px;font:400 14px 'Be Vietnam Pro',system-ui,sans-serif;caret-color:#172036}.ds-input:focus-visible{outline:none;border-color:#3b4a6b;box-shadow:0 0 0 3px #3b4a6b40}"
+    }
+  ],
+  "narrative": {
+    "northStar": "Sổ kế hoạch sinh viên",
+    "overview": "Giao diện là một cuốn sổ kế hoạch mở trên bàn học: giấy màu lạnh, các dòng kẻ mảnh, mực xanh đậm, và một cột ngày bên lề trái để mắt dò theo thời gian trước khi đọc nội dung. Mỗi deadline là một dòng trong sổ, không phải một tấm thẻ quảng cáo. Câu hỏi \"còn bao lâu\" luôn được trả lời trước câu \"là gì\".",
+    "keyCharacteristics": [
+      "Cột ngày bên trái dùng số căn đều (tabular), mọi danh sách sắp theo hạn.",
+      "Màu chỉ mang nghĩa trạng thái hoặc nhận diện môn học, không dùng để trang trí.",
+      "Một họ chữ duy nhất (Be Vietnam Pro), phân cấp bằng cỡ và độ đậm.",
+      "Bề mặt phẳng, phân lớp bằng viền mảnh và nền giấy, không đổ bóng.",
+      "Sáng và tối đều là giao diện chính thức, theo hệ thống và có nút đổi."
+    ],
+    "rules": [
+      { "name": "The Red Pen Rule", "body": "Đỏ chỉ dành cho việc đã trễ hoặc thao tác phá huỷ. Không dùng đỏ cho nhấn mạnh, logo hay trang trí.", "section": "colors" },
+      { "name": "The Subject Dot Rule", "body": "Màu môn học chỉ xuất hiện như một chấm tròn 10px cạnh tên môn, thanh màu của ảnh OG và ảnh bìa môn. Không tô nền, không làm viền dày.", "section": "colors" },
+      { "name": "The Tinted Pill Rule", "body": "Nhãn trạng thái là chữ màu đậm trên nền cùng màu 10% độ đậm; cả hai chế độ sáng và tối đều phải đạt tương phản AA 4.5:1.", "section": "colors" },
+      { "name": "The Tabular Time Rule", "body": "Mọi ngày, giờ và số đếm dùng chữ số tabular để các dòng thẳng cột.", "section": "typography" },
+      { "name": "The No Eyebrow Rule", "body": "Không đặt nhãn nhỏ viết hoa phía trên tiêu đề; tiêu đề tự đứng được.", "section": "typography" },
+      { "name": "The Flat Notebook Rule", "body": "Không đổ bóng cho thẻ hay nút. Trạng thái hover đổi màu viền hoặc nền nhạt, không nổi khối lên.", "section": "elevation" }
+    ],
+    "dos": [
+      "Do sắp mọi danh sách deadline theo hạn tăng dần và đặt cột ngày bên trái.",
+      "Do dùng chữ số tabular cho ngày, giờ và số liệu.",
+      "Do chỉ dùng đỏ trễ hạn cho việc đã trễ và thao tác xoá.",
+      "Do kiểm tra cả giao diện sáng và tối ở 390px và 1280px, tương phản AA cho mọi nhãn trạng thái.",
+      "Do để vùng chạm tối thiểu 40px trên mobile cho các điều khiển chính."
+    ],
+    "donts": [
+      "Don't dùng viền trái màu dày (trên 1px) cho thẻ, khối trích dẫn hay thông báo; dùng chấm màu môn học thay thế.",
+      "Don't đổ bóng cho thẻ hay nút.",
+      "Don't thêm font thứ hai hay chữ monospace cho ngày giờ.",
+      "Don't đặt nhãn nhỏ viết hoa (eyebrow) phía trên tiêu đề.",
+      "Don't dùng emoji hay ký tự Unicode thay icon; dùng lucide."
+    ]
+  }
+}
