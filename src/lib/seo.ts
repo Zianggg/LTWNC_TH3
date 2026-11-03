@@ -1,4 +1,6 @@
-export const SITE_URL = (process.env.SITE_URL ?? "http://localhost:3000").replace(/\/+$/, "");
+// Ưu tiên SITE_URL; trên Vercel tự dùng domain production; chạy trên máy thì localhost.
+const vercelUrl = process.env.VERCEL_PROJECT_PRODUCTION_URL ? `https://${process.env.VERCEL_PROJECT_PRODUCTION_URL}` : undefined;
+export const SITE_URL = (process.env.SITE_URL || vercelUrl || "http://localhost:3000").replace(/\/+$/, "");
 export const SITE_NAME = "Class Deadline Hub";
 
 export function absoluteUrl(path: string): string {

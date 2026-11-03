@@ -10,6 +10,16 @@ import { createDeadlineSchema, deadlineIdSchema, toggleDoneSchema } from "@/lib/
 // Server Action là endpoint công khai: ai có action id cũng gọi được, không cần qua giao diện.
 // Vì vậy MỌI action đều tự làm đủ 3 bước: kiểm tra phiên + quyền → kiểm tra dữ liệu → mới ghi.
 
+const READ_ONLY_MESSAGE =
+  "Bản demo trên Vercel chỉ cho xem: thay đổi không được lưu. Chạy bản cài trên máy (npm start) để thêm, xoá hoặc đánh dấu.";
+
+/** Lỗi ghi dữ liệu thường gặp → thông báo cho người dùng; lỗi lạ thì ném tiếp. */
+function writeFailure(error: unknown): ActionResult {
+  if (error instanceof Error && error.message === "READ_ONLY_STORAGE") return { ok: false, error: READ_ONLY_MESSAGE };
+  if (error instanceof Error && error.message === "DEADLINE_NOT_FOUND") return { ok: false, error: "Deadline này không còn tồn tại." };
+  throw error;
+}
+
 /** Làm mới mọi trang hiển thị danh sách deadline sau khi admin thêm/xoá.
  *  Pattern có segment động phải ghi cả route group, ví dụ "/(public)/deadlines/[id]". */
 function revalidateDeadlinePages() {
@@ -31,8 +41,8 @@ export async function toggleDoneAction(formData: FormData): Promise<ActionResult
 
   try {
     await setCompleted(session.user.id, parsed.data.id, parsed.data.done);
-  } catch {
-    return { ok: false, error: "Deadline này không còn tồn tại." };
+  } catch (error) {
+    return writeFailure(error);
   }
   revalidatePath("/(app)/dashboard", "layout");
   return { ok: true, message: parsed.data.done ? "Đã đánh dấu là xong." : "Đã bỏ đánh dấu." };
@@ -57,7 +67,12 @@ export async function createDeadlineAction(_prev: ActionResult | null, formData:
     return { ok: false, error: "Kiểm tra lại các ô được đánh dấu.", fieldErrors: { subjectSlug: ["Môn học không tồn tại"] }, values };
   }
 
-  const created = await createDeadline(parsed.data);
+  let created;
+  try {
+    created = await createDeadline(parsed.data);
+  } catch (error) {
+    return { ...writeFailure(error), values } as ActionResult;
+  }
   revalidateDeadlinePages();
   return { ok: true, message: `Đã thêm deadline #${created.id}.` };
 }
@@ -69,7 +84,13 @@ export async function deleteDeadlineAction(formData: FormData): Promise<ActionRe
   const parsed = deadlineIdSchema.safeParse(formData.get("id"));
   if (!parsed.success) return { ok: false, error: "Id deadline không hợp lệ." };
 
-  if (!(await deleteDeadline(parsed.data))) return { ok: false, error: "Deadline này đã bị xoá trước đó." };
+  let deleted: boolean;
+  try {
+    deleted = await deleteDeadline(parsed.data);
+  } catch (error) {
+    return writeFailure(error);
+  }
+  if (!deleted) return { ok: false, error: "Deadline này đã bị xoá trước đó." };
   revalidateDeadlinePages();
   return { ok: true, message: `Đã xoá deadline #${parsed.data}.` };
 }

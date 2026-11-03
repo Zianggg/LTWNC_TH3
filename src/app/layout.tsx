@@ -1,6 +1,7 @@
 import type { Metadata } from "next";
 import { Be_Vietnam_Pro } from "next/font/google";
 import { Providers } from "@/components/providers";
+import { SITE_URL } from "@/lib/seo";
 import "./globals.css";
 
 const beVietnamPro = Be_Vietnam_Pro({
@@ -11,7 +12,7 @@ const beVietnamPro = Be_Vietnam_Pro({
 });
 
 export const metadata: Metadata = {
-  metadataBase: new URL(process.env.SITE_URL ?? "http://localhost:3000"),
+  metadataBase: new URL(SITE_URL),
   title: {
     default: "Class Deadline Hub — Deadline của lớp",
     template: "%s | Class Deadline Hub",

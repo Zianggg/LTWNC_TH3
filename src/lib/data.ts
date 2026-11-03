@@ -19,8 +19,15 @@ async function readJson<T>(file: string): Promise<T> {
 async function writeJson(file: string, value: unknown): Promise<void> {
   const target = path.join(dataDir(), file);
   const tmp = `${target}.${process.pid}.${Date.now()}.tmp`;
-  await fs.writeFile(tmp, JSON.stringify(value, null, 2) + "\n", "utf8");
-  await fs.rename(tmp, target);
+  try {
+    await fs.writeFile(tmp, JSON.stringify(value, null, 2) + "\n", "utf8");
+    await fs.rename(tmp, target);
+  } catch (error) {
+    // Trên Vercel thư mục mã nguồn chỉ đọc: báo lỗi có tên để Server Action trả thông báo dễ hiểu.
+    const code = (error as NodeJS.ErrnoException).code;
+    if (code === "EROFS" || code === "EACCES" || code === "EPERM") throw new Error("READ_ONLY_STORAGE");
+    throw error;
+  }
 }
 
 // Các thao tác ghi chạy nối tiếp nhau để hai request không ghi đè lẫn nhau.

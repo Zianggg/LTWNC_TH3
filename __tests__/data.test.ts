@@ -56,6 +56,15 @@ describe("đọc dữ liệu", () => {
 });
 
 describe("ghi dữ liệu", () => {
+  test("filesystem chỉ đọc (Vercel) thì báo READ_ONLY_STORAGE, không lộ lỗi hệ thống", async () => {
+    const spy = jest
+      .spyOn(fs.promises, "writeFile")
+      .mockRejectedValueOnce(Object.assign(new Error("EROFS: read-only file system"), { code: "EROFS" }));
+    await expect(data.setCompleted("u-sv", "2", true)).rejects.toThrow("READ_ONLY_STORAGE");
+    spy.mockRestore();
+  });
+
+
   test("createDeadline cấp id kế tiếp và lưu lại được", async () => {
     const created = await data.createDeadline({
       subjectSlug: "lap-trinh-web-nang-cao",
