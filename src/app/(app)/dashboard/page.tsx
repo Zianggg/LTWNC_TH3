@@ -1,5 +1,6 @@
 import type { Metadata } from "next";
 import { DeadlineCard } from "@/components/deadline-card";
+import { ToggleDoneButton } from "@/components/toggle-done-button";
 import { getDashboardRows, summarize } from "@/lib/dashboard";
 import { requireSession } from "@/lib/guards";
 
@@ -33,8 +34,11 @@ export default async function DashboardPage() {
       {pending.length > 0 ? (
         <ul className="mt-4 space-y-3">
           {pending.map(({ deadline, subject }) => (
-            <li key={deadline.id}>
-              <DeadlineCard deadline={deadline} subject={subject} />
+            <li key={deadline.id} className="flex flex-col gap-2 sm:flex-row sm:items-center">
+              <div className="min-w-0 flex-1">
+                <DeadlineCard deadline={deadline} subject={subject} />
+              </div>
+              <ToggleDoneButton id={deadline.id} done={false} title={deadline.title} />
             </li>
           ))}
         </ul>

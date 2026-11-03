@@ -6,8 +6,10 @@ import { getDeadlinesBySubject, getSubject, getSubjects } from "@/lib/data";
 
 type Props = { params: Promise<{ slug: string }> };
 
-// SSG: sinh sẵn đủ 4 môn lúc build; slug khác ra 404 thay vì render thêm.
-export const dynamicParams = false;
+// SSG: sinh sẵn đủ 4 môn lúc build. Slug lạ gọi notFound() nên vẫn ra 404.
+// Không dùng dynamicParams = false: khi admin thêm/xoá, revalidatePath làm các trang này
+// bị purge và Next 15 trả 404 cho mọi slug vì không được phép render lại.
+export const dynamicParams = true;
 
 export async function generateStaticParams() {
   return (await getSubjects()).map((s) => ({ slug: s.slug }));

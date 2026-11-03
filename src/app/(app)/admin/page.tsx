@@ -1,4 +1,6 @@
 import type { Metadata } from "next";
+import { CreateDeadlineForm } from "@/components/admin/create-deadline-form";
+import { DeleteDeadlineButton } from "@/components/admin/delete-deadline-button";
 import { formatDue } from "@/lib/countdown";
 import { getDeadlines, getSubjects } from "@/lib/data";
 import { requirePermission } from "@/lib/guards";
@@ -22,7 +24,13 @@ export default async function AdminPage() {
       <h1 className="text-3xl font-bold tracking-tight">Quản trị deadline</h1>
       <p className="mt-2 text-muted-foreground">Thêm deadline mới hoặc xoá deadline đã huỷ. Trang công khai được cập nhật ngay sau khi lưu.</p>
 
-      <div className="mt-8 overflow-x-auto rounded-lg border bg-card">
+      <section aria-labelledby="create-title" className="mt-8 rounded-lg border bg-card p-5 sm:p-6">
+        <h2 id="create-title" className="mb-5 text-lg font-semibold">Thêm deadline</h2>
+        <CreateDeadlineForm subjects={subjects.map((s) => ({ slug: s.slug, name: s.name }))} />
+      </section>
+
+      <h2 className="mt-10 text-lg font-semibold">{deadlines.length} deadline hiện có</h2>
+      <div className="mt-4 overflow-x-auto rounded-lg border bg-card">
         <table className="w-full text-sm">
           <caption className="sr-only">Danh sách {deadlines.length} deadline</caption>
           <thead className="border-b bg-muted/50 text-left text-muted-foreground">
@@ -31,6 +39,7 @@ export default async function AdminPage() {
               <th scope="col" className="px-4 py-3 font-medium">Deadline</th>
               <th scope="col" className="px-4 py-3 font-medium">Môn</th>
               <th scope="col" className="px-4 py-3 font-medium">Hạn</th>
+              <th scope="col" className="px-4 py-3 font-medium"><span className="sr-only">Thao tác</span></th>
             </tr>
           </thead>
           <tbody className="divide-y">
@@ -43,6 +52,9 @@ export default async function AdminPage() {
                 </td>
                 <td className="px-4 py-3">{subjectBySlug.get(d.subjectSlug)?.name}</td>
                 <td className="px-4 py-3 whitespace-nowrap tabular-nums">{formatDue(d.dueAt)}</td>
+                <td className="px-4 py-3 text-right">
+                  <DeleteDeadlineButton id={d.id} title={d.title} />
+                </td>
               </tr>
             ))}
           </tbody>
