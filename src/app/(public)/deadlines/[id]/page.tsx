@@ -2,8 +2,10 @@ import type { Metadata } from "next";
 import Link from "next/link";
 import { notFound } from "next/navigation";
 import { Countdown } from "@/components/countdown";
+import { JsonLd } from "@/components/json-ld";
 import { formatDue } from "@/lib/countdown";
 import { getDeadline, getDeadlines, getSubject } from "@/lib/data";
+import { SITE_NAME, breadcrumbJsonLd } from "@/lib/seo";
 import { DEADLINE_TYPE_LABELS } from "@/lib/types";
 
 type Props = { params: Promise<{ id: string }> };
@@ -19,8 +21,20 @@ export async function generateStaticParams() {
 
 export async function generateMetadata({ params }: Props): Promise<Metadata> {
   const deadline = await getDeadline((await params).id);
-  if (!deadline) return { title: "Không tìm thấy deadline" };
-  return { title: deadline.title };
+  const subject = deadline ? await getSubject(deadline.subjectSlug) : null;
+  if (!deadline || !subject) return { title: "Không tìm thấy deadline" };
+
+  const summary = deadline.description.length > 150 ? `${deadline.description.slice(0, 147)}…` : deadline.description;
+  const description = `${DEADLINE_TYPE_LABELS[deadline.type]} môn ${subject.name}, hạn ${formatDue(deadline.dueAt)}. ${summary}`;
+  const url = `/deadlines/${deadline.id}`;
+  // og:image do opengraph-image.tsx cùng thư mục tự sinh và gắn vào.
+  return {
+    title: deadline.title,
+    description,
+    alternates: { canonical: url },
+    openGraph: { type: "article", url, title: deadline.title, description, siteName: SITE_NAME, locale: "vi_VN" },
+    twitter: { card: "summary_large_image", title: deadline.title, description },
+  };
 }
 
 export default async function DeadlineDetailPage({ params }: Props) {
@@ -30,8 +44,15 @@ export default async function DeadlineDetailPage({ params }: Props) {
   const subject = await getSubject(deadline.subjectSlug);
   if (!subject) notFound();
 
+  const breadcrumb = breadcrumbJsonLd([
+    { name: "Trang chủ", path: "/" },
+    { name: subject.name, path: `/subjects/${subject.slug}` },
+    { name: deadline.title, path: `/deadlines/${deadline.id}` },
+  ]);
+
   return (
     <article className="mx-auto max-w-3xl py-10">
+      <JsonLd data={breadcrumb} />
       <nav aria-label="Breadcrumb" className="text-sm text-muted-foreground">
         <ol className="flex flex-wrap items-center gap-1.5">
           <li>

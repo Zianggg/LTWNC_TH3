@@ -15,7 +15,7 @@ import { createDeadlineSchema, deadlineIdSchema, toggleDoneSchema } from "@/lib/
 function revalidateDeadlinePages() {
   revalidatePath("/");
   revalidatePath("/deadlines");
-  revalidatePath("/(public)/deadlines/[id]", "page");
+  revalidatePath("/(public)/deadlines/[id]", "layout"); // gồm cả opengraph-image
   revalidatePath("/(public)/subjects/[slug]", "page");
   revalidatePath("/sitemap.xml");
   revalidatePath("/admin");
