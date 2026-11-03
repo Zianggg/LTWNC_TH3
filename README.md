@@ -7,6 +7,8 @@ Cổng web deadline của lớp. Bài thực hành 3, Lập trình Web nâng cao
 - Lớp trưởng (admin) thêm và xoá deadline. Trang công khai được làm mới ngay.
 - Giao diện sáng và tối: tự theo cài đặt máy, có nút đổi trên header (Tự động / Sáng / Tối).
 
+**Bản chạy thử:** https://class-deadline-hub.vercel.app (Vercel, chỉ để xem; xem mục Điểm cộng).
+
 Công nghệ: Next.js 15.5 (App Router), React 19, TypeScript, Tailwind CSS v4, shadcn/ui, Auth.js v5 (NextAuth), zod, Jest.
 
 ![Trang chủ](docs/screenshots/home.png)
@@ -126,12 +128,12 @@ Vì vậy dự án bảo vệ nhiều lớp (defense in depth):
 
 ## Điểm cộng
 
-- **Test Jest cho `can()`**: `__tests__/permissions.test.ts` kiểm tra đủ 12 ô của ma trận. Toàn bộ bộ test: `npm test` (64 test).
-- **Đăng nhập GitHub (OAuth)**: chỉ bật khi có biến môi trường, nút "Đăng nhập với GitHub" chỉ hiện lúc đó. Tài khoản GitHub luôn có vai trò sinh viên. Cách bật:
-  1. Vào GitHub, mở Settings › Developer settings › OAuth Apps › New OAuth App.
-  2. Homepage URL: `http://localhost:3000`. Authorization callback URL: `http://localhost:3000/api/auth/callback/github`.
-  3. Điền `AUTH_GITHUB_ID` và `AUTH_GITHUB_SECRET` vào `.env.local`, rồi chạy lại `npm start`.
-- **Deploy Vercel**: chưa làm. Lưu ý: filesystem trên Vercel chỉ đọc được, nên các thao tác ghi file JSON (đánh dấu xong, thêm/xoá) sẽ không lưu lại. Bản deploy chỉ phù hợp để xem, đăng nhập và kiểm tra SEO.
+- **Test Jest cho `can()`**: `__tests__/permissions.test.ts` kiểm tra đủ 12 ô của ma trận. Toàn bộ bộ test: `npm test` (65 test).
+- **Đăng nhập GitHub (OAuth)**: chỉ bật khi có biến môi trường, nút "Đăng nhập với GitHub" chỉ hiện lúc đó. Tài khoản GitHub luôn có vai trò sinh viên. Mỗi OAuth App của GitHub chỉ nhận một callback URL, nên dùng hai app:
+  1. Vào GitHub, mở Settings › Developer settings › OAuth Apps › New OAuth App, tạo một app cho máy (`http://localhost:3000`, callback `http://localhost:3000/api/auth/callback/github`) và một app cho Vercel (`https://class-deadline-hub.vercel.app`, callback `https://class-deadline-hub.vercel.app/api/auth/callback/github`).
+  2. Chạy `powershell -ExecutionPolicy Bypass -File scripts\setup-github-oauth.ps1` rồi dán Client ID/secret khi được hỏi. Script ghi app Vercel lên biến môi trường Production của Vercel, app local vào `.env.local`; secret được nhập ẩn.
+  3. Chạy lại `npm start` (máy) hoặc `npx vercel deploy --prod` (Vercel).
+- **Deploy Vercel**: https://class-deadline-hub.vercel.app. Biến môi trường production: `AUTH_SECRET`, `AUTH_GITHUB_ID`, `AUTH_GITHUB_SECRET`; `SITE_URL` tự lấy từ domain Vercel. `next.config.ts` khai báo `outputFileTracingIncludes` để gói serverless có `data/*.json` và font của ảnh OG. Filesystem trên Vercel chỉ đọc nên đánh dấu xong, thêm và xoá deadline không lưu lại được: app hiện thông báo "Bản demo trên Vercel chỉ cho xem…" thay vì lỗi. Muốn thử đủ chức năng ghi thì chạy bản trên máy.
 
 ## Cấu trúc thư mục
 
