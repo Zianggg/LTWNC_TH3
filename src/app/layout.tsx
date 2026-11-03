@@ -1,0 +1,35 @@
+import type { Metadata } from "next";
+import { Be_Vietnam_Pro } from "next/font/google";
+import "./globals.css";
+
+const beVietnamPro = Be_Vietnam_Pro({
+  variable: "--font-sans",
+  subsets: ["latin", "vietnamese"],
+  weight: ["400", "500", "600", "700"],
+  display: "swap",
+});
+
+export const metadata: Metadata = {
+  metadataBase: new URL(process.env.SITE_URL ?? "http://localhost:3000"),
+  title: {
+    default: "Class Deadline Hub — Deadline của lớp",
+    template: "%s | Class Deadline Hub",
+  },
+  description:
+    "Cổng tra cứu deadline của lớp: xem hạn nộp bài tập, kiểm tra, đồ án theo từng môn học.",
+  applicationName: "Class Deadline Hub",
+};
+
+export default function RootLayout({
+  children,
+}: Readonly<{
+  children: React.ReactNode;
+}>) {
+  return (
+    <html lang="vi">
+      <body className={`${beVietnamPro.variable} font-sans antialiased`}>
+        {children}
+      </body>
+    </html>
+  );
+}
