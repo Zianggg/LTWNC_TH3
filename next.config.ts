@@ -1,7 +1,10 @@
 import type { NextConfig } from "next";
 
 const nextConfig: NextConfig = {
-  /* config options here */
+  experimental: {
+    // shadcn import từ gói gộp "radix-ui"; chỉ đưa vào bundle những phần thực sự dùng.
+    optimizePackageImports: ["radix-ui"],
+  },
 };
 
 export default nextConfig;
