@@ -129,9 +129,9 @@ Vì vậy dự án bảo vệ nhiều lớp (defense in depth):
 ## Điểm cộng
 
 - **Test Jest cho `can()`**: `__tests__/permissions.test.ts` kiểm tra đủ 12 ô của ma trận. Toàn bộ bộ test: `npm test` (65 test).
-- **Đăng nhập GitHub (OAuth)**: chỉ bật khi có biến môi trường, nút "Đăng nhập với GitHub" chỉ hiện lúc đó. Tài khoản GitHub luôn có vai trò sinh viên. Mỗi OAuth App của GitHub chỉ nhận một callback URL, nên dùng hai app:
-  1. Vào GitHub, mở Settings › Developer settings › OAuth Apps › New OAuth App, tạo một app cho máy (`http://localhost:3000`, callback `http://localhost:3000/api/auth/callback/github`) và một app cho Vercel (`https://class-deadline-hub.vercel.app`, callback `https://class-deadline-hub.vercel.app/api/auth/callback/github`).
-  2. Chạy `powershell -ExecutionPolicy Bypass -File scripts\setup-github-oauth.ps1` rồi dán Client ID/secret khi được hỏi. Script ghi app Vercel lên biến môi trường Production của Vercel, app local vào `.env.local`; secret được nhập ẩn.
+- **Đăng nhập GitHub (OAuth)**: chỉ bật khi có biến môi trường, nút "Đăng nhập với GitHub" chỉ hiện lúc đó. Tài khoản GitHub luôn có vai trò sinh viên. Một OAuth App dùng chung cho máy và Vercel:
+  1. Vào GitHub, mở Settings › Developer settings › OAuth Apps › New OAuth App. Homepage `https://class-deadline-hub.vercel.app`, Redirect URIs khai báo cả hai dòng `http://localhost:3000/api/auth/callback/github` và `https://class-deadline-hub.vercel.app/api/auth/callback/github` (không bật wildcard).
+  2. Chạy `powershell -ExecutionPolicy Bypass -File scripts\setup-github-oauth.ps1` rồi dán cùng Client ID/secret ở cả hai bước. Bước 1 ghi lên biến môi trường Production của Vercel, bước 2 ghi vào `.env.local`; secret được nhập ẩn.
   3. Chạy lại `npm start` (máy) hoặc `npx vercel deploy --prod` (Vercel).
 - **Deploy Vercel**: https://class-deadline-hub.vercel.app. Biến môi trường production: `AUTH_SECRET`, `AUTH_GITHUB_ID`, `AUTH_GITHUB_SECRET`; `SITE_URL` tự lấy từ domain Vercel. `next.config.ts` khai báo `outputFileTracingIncludes` để gói serverless có `data/*.json` và font của ảnh OG. Filesystem trên Vercel chỉ đọc nên đánh dấu xong, thêm và xoá deadline không lưu lại được: app hiện thông báo "Bản demo trên Vercel chỉ cho xem…" thay vì lỗi. Muốn thử đủ chức năng ghi thì chạy bản trên máy.
 

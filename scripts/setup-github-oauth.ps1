@@ -42,7 +42,7 @@ function Set-VercelEnv([string]$name, [string]$value) {
 }
 
 Write-Host ""
-Write-Host "== 1/2. OAuth App cho ban Vercel (callback https://class-deadline-hub.vercel.app/api/auth/callback/github)" -ForegroundColor Cyan
+Write-Host "== 1/2. Ban Vercel (app phai co redirect URI https://class-deadline-hub.vercel.app/api/auth/callback/github)" -ForegroundColor Cyan
 $prodId = Read-Host "Client ID (Enter de bo qua)"
 if ($prodId) {
   $prodSecret = Read-Secret "Client secret"
@@ -52,7 +52,7 @@ if ($prodId) {
 }
 
 Write-Host ""
-Write-Host "== 2/2. OAuth App cho may nay (callback http://localhost:3000/api/auth/callback/github)" -ForegroundColor Cyan
+Write-Host "== 2/2. May nay (app phai co redirect URI http://localhost:3000/api/auth/callback/github; co the dung cung app)" -ForegroundColor Cyan
 $localId = Read-Host "Client ID (Enter de bo qua)"
 if ($localId) {
   $localSecret = Read-Secret "Client secret"
