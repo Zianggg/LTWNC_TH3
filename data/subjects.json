@@ -1,0 +1,38 @@
+[
+  {
+    "slug": "lap-trinh-web-nang-cao",
+    "code": "INT1434",
+    "name": "Lập trình Web nâng cao",
+    "lecturer": "ThS. Nguyễn Văn Hùng",
+    "image": "/subjects/lap-trinh-web-nang-cao.webp",
+    "color": "#2563eb",
+    "description": "React, TypeScript, quản lý state và Next.js: SSR, SSG, ISR, xác thực và tối ưu SEO."
+  },
+  {
+    "slug": "co-so-du-lieu-phan-tan",
+    "code": "INT14148",
+    "name": "Cơ sở dữ liệu phân tán",
+    "lecturer": "TS. Trần Thị Mai",
+    "image": "/subjects/co-so-du-lieu-phan-tan.webp",
+    "color": "#059669",
+    "description": "Phân mảnh, nhân bản, giao dịch phân tán và tối ưu truy vấn trên nhiều nút dữ liệu."
+  },
+  {
+    "slug": "phat-trien-ung-dung-di-dong",
+    "code": "INT1449",
+    "name": "Phát triển ứng dụng di động",
+    "lecturer": "ThS. Lê Quang Minh",
+    "image": "/subjects/phat-trien-ung-dung-di-dong.webp",
+    "color": "#d97706",
+    "description": "React Native, điều hướng, lưu trữ cục bộ, Firebase và đóng gói ứng dụng Android."
+  },
+  {
+    "slug": "kiem-thu-phan-mem",
+    "code": "INT1416",
+    "name": "Đảm bảo chất lượng và kiểm thử phần mềm",
+    "lecturer": "TS. Phạm Thu Hà",
+    "image": "/subjects/kiem-thu-phan-mem.webp",
+    "color": "#9333ea",
+    "description": "Kỹ thuật thiết kế ca kiểm thử, kiểm thử đơn vị, tích hợp, tự động hoá và quản lý lỗi."
+  }
+]
