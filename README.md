@@ -61,8 +61,8 @@ Dữ liệu nằm trong `data/*.json` (4 môn, 12 deadline). Mật khẩu đư�
 
 | Trang | Performance | Accessibility | Best Practices | SEO | LCP | CLS | TBT |
 | --- | --- | --- | --- | --- | --- | --- | --- |
-| `/` | 100 | 100 | 100 | 100 | 0.8 s | 0.016 | 90 ms |
-| `/deadlines/1` | 100 | 100 | 100 | 100 | 0.8 s | 0.006 | 70 ms |
+| `/` | 100 | 100 | 100 | 100 | 0.8 s | 0.014 | 70 ms |
+| `/deadlines/1` | 100 | 100 | 100 | 100 | 0.8 s | 0.006 | 60 ms |
 
 ![Lighthouse trang chủ](docs/screenshots/lighthouse-home.png)
 ![Lighthouse /deadlines/1](docs/screenshots/lighthouse-deadline-1.png)
