@@ -21,33 +21,33 @@ export function NextUp({ items }: { items: NextUpItem[] }) {
   const next = upcoming[0];
 
   return (
-    <section aria-labelledby="next-up-title" className="relative overflow-hidden rounded-xl bg-primary p-6 text-primary-foreground sm:p-8">
-      <h2 id="next-up-title" className="text-sm font-medium text-primary-foreground/70">
+    <section aria-labelledby="next-up-title" className="relative overflow-hidden rounded-xl bg-panel p-6 text-panel-foreground sm:p-8">
+      <h2 id="next-up-title" className="text-sm font-medium text-panel-foreground/70">
         Hạn gần nhất
       </h2>
       {!now ? (
         <div className="mt-4 space-y-3" aria-hidden="true">
-          <div className="h-16 w-40 rounded-md bg-primary-foreground/10" />
-          <div className="h-6 w-3/4 rounded-md bg-primary-foreground/10" />
-          <div className="h-4 w-1/2 rounded-md bg-primary-foreground/10" />
+          <div className="h-16 w-40 rounded-md bg-panel-foreground/10" />
+          <div className="h-6 w-3/4 rounded-md bg-panel-foreground/10" />
+          <div className="h-4 w-1/2 rounded-md bg-panel-foreground/10" />
         </div>
       ) : next ? (
         <>
           <p className="mt-3 text-6xl font-bold leading-none tabular-nums sm:text-7xl">
             {daysUntil(next.dueAt, now) === 0 ? "Hôm nay" : `${daysUntil(next.dueAt, now)} ngày`}
           </p>
-          <p className="mt-5 flex items-center gap-2 text-sm text-primary-foreground/70">
+          <p className="mt-5 flex items-center gap-2 text-sm text-panel-foreground/70">
             <span className="size-2.5 rounded-full" style={{ backgroundColor: next.color }} aria-hidden="true" />
             {next.subjectName}
           </p>
           <Link href={`/deadlines/${next.id}`} className="mt-1 block text-xl font-semibold leading-snug text-balance underline-offset-4 hover:underline">
             {next.title}
           </Link>
-          <p className="mt-2 text-sm text-primary-foreground/70">
+          <p className="mt-2 text-sm text-panel-foreground/70">
             Hạn {formatDue(next.dueAt)}. {countdownLabel(daysUntil(next.dueAt, now))}.
           </p>
           {upcoming.length > 1 && (
-            <p className="mt-6 border-t border-primary-foreground/15 pt-4 text-sm text-primary-foreground/70">
+            <p className="mt-6 border-t border-panel-foreground/15 pt-4 text-sm text-panel-foreground/70">
               Sau đó còn {upcoming.length - 1} deadline nữa đang chờ.
             </p>
           )}

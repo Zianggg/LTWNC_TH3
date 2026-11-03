@@ -5,6 +5,7 @@ Cổng web deadline của lớp. Bài thực hành 3, Lập trình Web nâng cao
 - Ai cũng xem được deadline công khai. Mỗi deadline có ảnh chia sẻ riêng, có trong sitemap và structured data.
 - Sinh viên đăng nhập để đánh dấu deadline đã xong.
 - Lớp trưởng (admin) thêm và xoá deadline. Trang công khai được làm mới ngay.
+- Giao diện sáng và tối: tự theo cài đặt máy, có nút đổi trên header (Tự động / Sáng / Tối).
 
 Công nghệ: Next.js 15.5 (App Router), React 19, TypeScript, Tailwind CSS v4, shadcn/ui, Auth.js v5 (NextAuth), zod, Jest.
 
@@ -58,8 +59,8 @@ Dữ liệu nằm trong `data/*.json` (4 môn, 12 deadline). Mật khẩu đư�
 
 | Trang | Performance | Accessibility | Best Practices | SEO | LCP | CLS | TBT |
 | --- | --- | --- | --- | --- | --- | --- | --- |
-| `/` | 100 | 100 | 100 | 100 | 0.8 s | 0.014 | 50 ms |
-| `/deadlines/1` | 100 | 100 | 100 | 100 | 0.8 s | 0.005 | 50 ms |
+| `/` | 100 | 100 | 100 | 100 | 0.8 s | 0.016 | 90 ms |
+| `/deadlines/1` | 100 | 100 | 100 | 100 | 0.8 s | 0.006 | 70 ms |
 
 ![Lighthouse trang chủ](docs/screenshots/lighthouse-home.png)
 ![Lighthouse /deadlines/1](docs/screenshots/lighthouse-deadline-1.png)

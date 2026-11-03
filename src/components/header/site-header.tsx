@@ -1,5 +1,6 @@
 import Link from "next/link";
 import type { ReactNode } from "react";
+import { ThemeToggle } from "./theme-toggle";
 
 const NAV = [
   { href: "/deadlines", label: "Deadline" },
@@ -34,7 +35,10 @@ export function SiteHeader({ userMenu }: { userMenu?: ReactNode }) {
             </Link>
           ))}
         </nav>
-        <div className="ml-auto min-w-0">{userMenu}</div>
+        <div className="ml-auto flex min-w-0 items-center gap-1 sm:gap-2">
+          <ThemeToggle />
+          <div className="min-w-0">{userMenu}</div>
+        </div>
       </div>
       {/* Dưới 640px menu chính chuyển xuống một hàng riêng thay vì biến mất. */}
       <nav aria-label="Điều hướng chính" className="border-t sm:hidden">

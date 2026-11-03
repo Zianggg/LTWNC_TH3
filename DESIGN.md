@@ -22,6 +22,7 @@ colors:
   night-overdue: "#ff7a7a"
   night-soon: "#f2a65a"
   night-later: "#4fd1b5"
+  night-panel: "#232e4d"
 typography:
   display:
     fontFamily: "Be Vietnam Pro, system-ui, sans-serif"
@@ -48,6 +49,11 @@ typography:
   label:
     fontFamily: "Be Vietnam Pro, system-ui, sans-serif"
     fontSize: "0.875rem"
+    fontWeight: 500
+    lineHeight: 1.43
+  label-small:
+    fontFamily: "Be Vietnam Pro, system-ui, sans-serif"
+    fontSize: "0.8rem"
     fontWeight: 500
     lineHeight: 1.43
   date-numeral:
@@ -172,6 +178,7 @@ Bảng màu giấy và mực, lạnh và trung tính, với ba mực trạng th�
 - **Title** (600, 1rem, 1.375): tên deadline trong dòng danh sách, tên môn.
 - **Body** (400, 1rem, 1.625): mô tả yêu cầu, đoạn giới thiệu; tối đa khoảng 65ch.
 - **Label** (500, 0.875rem): nhãn trường, chữ phụ, menu.
+- **Label small** (500, 0.8rem): chữ trong nút cỡ nhỏ (header, thao tác phụ).
 - **Date numeral** (700, 1.875rem, 1, tabular nums): số ngày trong cột lề; mọi ngày giờ và số liệu đều dùng chữ số căn đều.
 
 ### Named Rules
@@ -222,11 +229,11 @@ Bo góc vừa, thống nhất 8px cho dòng deadline, nút và bảng; 11px cho 
 - **Error:** viền đỏ, thông báo lỗi tiếng Việt ngay dưới ô (liên kết bằng aria-describedby); giá trị đã nhập được giữ lại.
 
 ### Navigation
-- **Header:** logo "DH" trên ô mực bo 6px; menu chữ 14px màu bút chì, hover nền nhạt. Dưới 640px menu là hàng riêng gồm Deadline, Môn học, Bảng của tôi, vùng chạm 44px. Tên và vai trò người dùng luôn hiển thị.
+- **Header:** logo "DH" trên ô mực bo 6px; nút biểu tượng đổi giao diện (Tự động → Sáng → Tối, lucide Monitor/Sun/Moon) đặt trước menu người dùng; menu chữ 14px màu bút chì, hover nền nhạt. Dưới 640px menu là hàng riêng gồm Deadline, Môn học, Bảng của tôi, vùng chạm 44px. Tên và vai trò người dùng luôn hiển thị.
 - **Sidebar dashboard:** mục đang mở nền mực chữ giấy (aria-current); mục đang tải hiện chấm nhỏ nhấp nháy bên phải.
 
 ### Hạn gần nhất (signature)
-Một trang sổ đảo màu: nền mực, bo 11px, padding 32px. Con số ngày còn lại cỡ 4.5rem đậm, tabular; dưới là chấm màu môn, tên deadline (link) và câu hạn đầy đủ. Đây là điểm nhấn duy nhất của hệ; không lặp lại khối đảo màu này ở chỗ khác.
+Một trang sổ đảo màu: nền mực, bo 11px, padding 32px (token `--panel`; ở giao diện tối là night-panel, nổi nhẹ trên giấy đêm thay vì đảo thành mảng sáng). Con số ngày còn lại cỡ 4.5rem đậm, tabular; dưới là chấm màu môn, tên deadline (link) và câu hạn đầy đủ. Đây là điểm nhấn duy nhất của hệ; không lặp lại khối đảo màu này ở chỗ khác.
 
 ## Do's and Don'ts
 

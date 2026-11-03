@@ -13,6 +13,8 @@
   --color-soon: var(--soon);
   --color-later: var(--later);
   --color-done: var(--done);
+  --color-panel: var(--panel);
+  --color-panel-foreground: var(--panel-foreground);
   --font-heading: var(--font-sans);
   --color-sidebar-ring: var(--sidebar-ring);
   --color-sidebar-border: var(--sidebar-border);
@@ -82,6 +84,9 @@
   --soon: #8f4207;
   --later: #0f766e;
   --done: #64748b;
+  /* Khối điểm nhấn "Hạn gần nhất" */
+  --panel: #172036;
+  --panel-foreground: #f6f7fa;
   --sidebar: #ffffff;
   --sidebar-foreground: #172036;
   --sidebar-primary: #172036;
@@ -90,6 +95,42 @@
   --sidebar-accent-foreground: #172036;
   --sidebar-border: #dde1ea;
   --sidebar-ring: #3b4a6b;
+}
+
+/* Giao diện tối: cùng cuốn sổ, đọc dưới đèn bàn ban đêm. */
+.dark {
+  --background: #0f1524;
+  --foreground: #e6e9f0;
+  --card: #161d2f;
+  --card-foreground: #e6e9f0;
+  --popover: #161d2f;
+  --popover-foreground: #e6e9f0;
+  --primary: #e6e9f0;
+  --primary-foreground: #0f1524;
+  --secondary: #1f2840;
+  --secondary-foreground: #e6e9f0;
+  --muted: #1b2337;
+  --muted-foreground: #9aa3b5;
+  --accent: #1f2840;
+  --accent-foreground: #e6e9f0;
+  --destructive: #ff7a7a;
+  --border: #273049;
+  --input: #34405c;
+  --ring: #8a9ac0;
+  --overdue: #ff7a7a;
+  --soon: #f2a65a;
+  --later: #4fd1b5;
+  --done: #8a94a6;
+  --panel: #232e4d;
+  --panel-foreground: #e6e9f0;
+  --sidebar: #161d2f;
+  --sidebar-foreground: #e6e9f0;
+  --sidebar-primary: #e6e9f0;
+  --sidebar-primary-foreground: #0f1524;
+  --sidebar-accent: #1f2840;
+  --sidebar-accent-foreground: #e6e9f0;
+  --sidebar-border: #273049;
+  --sidebar-ring: #8a9ac0;
 }
 
 @layer base {
