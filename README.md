@@ -26,7 +26,7 @@ Các lệnh khác:
 | Lệnh | Việc |
 | --- | --- |
 | `npm run dev` | Chạy chế độ phát triển |
-| `npm test` | Chạy 61 test Jest (ma trận `can()`, dữ liệu, schema, đếm ngược, đăng nhập, SEO) |
+| `npm test` | Chạy 64 test Jest (ma trận `can()`, dữ liệu, schema, đếm ngược, đăng nhập, SEO) |
 | `npm run lint` | ESLint |
 | `node scripts/hash-password.mjs <mật khẩu>` | Băm mật khẩu để thêm tài khoản vào `data/users.json` |
 
@@ -125,7 +125,7 @@ Vì vậy dự án bảo vệ nhiều lớp (defense in depth):
 
 ## Điểm cộng
 
-- **Test Jest cho `can()`**: `__tests__/permissions.test.ts` kiểm tra đủ 12 ô của ma trận. Toàn bộ bộ test: `npm test` (61 test).
+- **Test Jest cho `can()`**: `__tests__/permissions.test.ts` kiểm tra đủ 12 ô của ma trận. Toàn bộ bộ test: `npm test` (64 test).
 - **Đăng nhập GitHub (OAuth)**: chỉ bật khi có biến môi trường, nút "Đăng nhập với GitHub" chỉ hiện lúc đó. Tài khoản GitHub luôn có vai trò sinh viên. Cách bật:
   1. Vào GitHub, mở Settings › Developer settings › OAuth Apps › New OAuth App.
   2. Homepage URL: `http://localhost:3000`. Authorization callback URL: `http://localhost:3000/api/auth/callback/github`.

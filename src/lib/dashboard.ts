@@ -1,5 +1,5 @@
 import "server-only";
-import { daysUntil } from "./countdown";
+import { daysUntil, isUpcoming } from "./countdown";
 import { getCompletedIds, getDeadlines, getSubjects } from "./data";
 import type { Deadline, Subject } from "./types";
 
@@ -26,10 +26,7 @@ export function summarize(rows: DashboardRow[], now: Date) {
   return {
     total: rows.length,
     done: rows.length - pending.length,
-    overdue: pending.filter((r) => daysUntil(r.deadline.dueAt, now) < 0).length,
-    dueThisWeek: pending.filter((r) => {
-      const days = daysUntil(r.deadline.dueAt, now);
-      return days >= 0 && days <= 7;
-    }).length,
+    overdue: pending.filter((r) => !isUpcoming(r.deadline.dueAt, now)).length,
+    dueThisWeek: pending.filter((r) => isUpcoming(r.deadline.dueAt, now) && daysUntil(r.deadline.dueAt, now) <= 7).length,
   };
 }

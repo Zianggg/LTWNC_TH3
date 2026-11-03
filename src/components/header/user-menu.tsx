@@ -2,7 +2,7 @@
 
 import Link from "next/link";
 import { usePathname } from "next/navigation";
-import { useEffect } from "react";
+import { useEffect, useRef } from "react";
 import { useSession } from "next-auth/react";
 import { logoutAction } from "@/actions/auth";
 import { Button } from "@/components/ui/button";
@@ -15,15 +15,18 @@ const ROLE_LABELS: Record<Role, string> = { admin: "Lớp trưởng", user: "Sin
 export function UserMenu() {
   const { data: session, status, update } = useSession();
   const pathname = usePathname();
+  const previousPath = useRef(pathname);
 
-  // Đăng nhập/đăng xuất bằng Server Action chỉ chuyển trang phía client,
-  // nên hỏi lại phiên mỗi khi đổi đường dẫn để header không hiện trạng thái cũ.
+  // Đăng nhập bằng Server Action chỉ chuyển trang phía client, SessionProvider vẫn giữ phiên rỗng.
+  // Vì vậy hỏi lại phiên đúng một lần khi rời /login (đăng xuất thì tải lại cả trang).
   useEffect(() => {
-    void update();
+    if (previousPath.current === "/login" && pathname !== "/login") void update();
+    previousPath.current = pathname;
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [pathname]);
 
-  if (status === "loading") {
+  // Chỉ hiện khung chờ lúc chưa có dữ liệu phiên nào, không nháy lại khi đang làm mới.
+  if (status === "loading" && session === undefined) {
     return <div className="h-9 w-40 animate-pulse rounded-md bg-muted" aria-hidden="true" />;
   }
 

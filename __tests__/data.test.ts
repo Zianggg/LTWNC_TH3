@@ -68,6 +68,19 @@ describe("ghi dữ liệu", () => {
     expect(await data.getDeadline("13")).not.toBeNull();
   });
 
+  test("xoá deadline có id lớn nhất rồi thêm mới thì không dùng lại id cũ", async () => {
+    expect(await data.deleteDeadline("12")).toBe(true);
+    const created = await data.createDeadline({
+      subjectSlug: "kiem-thu-phan-mem",
+      title: "Bài thay thế",
+      description: "",
+      type: "quiz",
+      dueAt: "2026-12-02T10:00:00+07:00",
+    });
+    expect(created.id).toBe("13");
+    expect(await data.getDeadline("12")).toBeNull();
+  });
+
   test("setCompleted bật rồi tắt trạng thái đã xong", async () => {
     await data.setCompleted("u-sv", "2", true);
     expect(await data.getCompletedIds("u-sv")).toContain("2");

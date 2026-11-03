@@ -1,7 +1,7 @@
 "use client";
 
 import { useEffect, useMemo, useState, type ReactNode } from "react";
-import { daysUntil } from "@/lib/countdown";
+import { isUpcoming } from "@/lib/countdown";
 import { cn } from "@/lib/utils";
 
 type Status = "all" | "upcoming" | "overdue";
@@ -33,8 +33,7 @@ export function DeadlineFilter({ items, subjects }: { items: FilterItem[]; subje
       items.filter((item) => {
         if (subject !== "all" && item.subjectSlug !== subject) return false;
         if (status === "all" || !now) return true;
-        const days = daysUntil(item.dueAt, now);
-        return status === "overdue" ? days < 0 : days >= 0;
+        return status === "overdue" ? !isUpcoming(item.dueAt, now) : isUpcoming(item.dueAt, now);
       }),
     [items, subject, status, now],
   );

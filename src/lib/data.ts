@@ -5,6 +5,8 @@ import type { Deadline, NewDeadline, Subject, UserRecord } from "./types";
 
 // Toàn bộ đọc/ghi file JSON đi qua module này.
 type Completions = Record<string, string[]>;
+/** Bộ đếm id chỉ tăng: id của deadline đã xoá không bao giờ được cấp lại (link cũ vẫn ra 404). */
+type Meta = { lastDeadlineId: number };
 
 const dataDir = () => process.env.DATA_DIR ?? path.join(process.cwd(), "data");
 
@@ -78,9 +80,12 @@ export function setCompleted(userId: string, deadlineId: string, done: boolean):
 export function createDeadline(input: NewDeadline): Promise<Deadline> {
   return serialized(async () => {
     const deadlines = await readJson<Deadline[]>("deadlines.json");
-    const nextId = deadlines.reduce((max, d) => Math.max(max, Number(d.id) || 0), 0) + 1;
+    const meta = await readJson<Meta>("meta.json").catch((): Meta => ({ lastDeadlineId: 0 }));
+    const maxExisting = deadlines.reduce((max, d) => Math.max(max, Number(d.id) || 0), 0);
+    const nextId = Math.max(meta.lastDeadlineId, maxExisting) + 1;
     const created: Deadline = { ...input, id: String(nextId) };
     await writeJson("deadlines.json", [...deadlines, created]);
+    await writeJson("meta.json", { lastDeadlineId: nextId } satisfies Meta);
     return created;
   });
 }

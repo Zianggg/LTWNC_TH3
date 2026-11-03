@@ -19,6 +19,11 @@ export function daysUntil(dueAt: string, now: Date): number {
   return dayIndex(new Date(dueAt)) - dayIndex(now);
 }
 
+/** Còn hạn hay không, so theo thời điểm (bài thi 09:00 đã qua lúc 15:00 cùng ngày là hết hạn). */
+export function isUpcoming(dueAt: string, now: Date): boolean {
+  return new Date(dueAt).getTime() > now.getTime();
+}
+
 export function countdownLabel(days: number): string {
   if (days > 0) return `Còn ${days} ngày`;
   if (days === 0) return "Hết hạn hôm nay";

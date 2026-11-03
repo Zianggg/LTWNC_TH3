@@ -2,7 +2,7 @@
 
 import Link from "next/link";
 import { useEffect, useState } from "react";
-import { countdownLabel, daysUntil, formatDue } from "@/lib/countdown";
+import { countdownLabel, daysUntil, formatDue, isUpcoming } from "@/lib/countdown";
 
 export interface NextUpItem {
   id: string;
@@ -17,7 +17,7 @@ export function NextUp({ items }: { items: NextUpItem[] }) {
   const [now, setNow] = useState<Date | null>(null);
   useEffect(() => setNow(new Date()), []);
 
-  const upcoming = now ? items.filter((d) => daysUntil(d.dueAt, now) >= 0) : [];
+  const upcoming = now ? items.filter((d) => isUpcoming(d.dueAt, now)) : [];
   const next = upcoming[0];
 
   return (
