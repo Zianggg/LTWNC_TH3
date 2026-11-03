@@ -27,6 +27,10 @@ export async function loginAction(_prev: LoginState, formData: FormData): Promis
   }
 }
 
+export async function githubLoginAction(formData: FormData): Promise<void> {
+  await signIn("github", { redirectTo: safeCallbackUrl(formData.get("callbackUrl")?.toString()) });
+}
+
 // Chỉ xoá cookie phiên; client tự tải lại trang để SessionProvider không giữ phiên cũ.
 export async function logoutAction(): Promise<void> {
   await signOut({ redirect: false });

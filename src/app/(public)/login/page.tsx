@@ -1,4 +1,5 @@
 import type { Metadata } from "next";
+import { githubEnabled } from "@/auth";
 import { LoginForm } from "@/components/login-form";
 import { safeCallbackUrl } from "@/lib/auth-helpers";
 
@@ -30,7 +31,7 @@ export default async function LoginPage({ searchParams }: Props) {
         </div>
       </div>
       <div className="rounded-xl border bg-card p-6 sm:p-8">
-        <LoginForm callbackUrl={callbackUrl} />
+        <LoginForm callbackUrl={callbackUrl} githubEnabled={githubEnabled} />
       </div>
     </div>
   );
