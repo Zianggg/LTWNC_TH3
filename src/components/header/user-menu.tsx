@@ -4,6 +4,7 @@ import Link from "next/link";
 import { usePathname } from "next/navigation";
 import { useEffect, useRef } from "react";
 import { useSession } from "next-auth/react";
+import { toast } from "sonner";
 import { logoutAction } from "@/actions/auth";
 import { Button } from "@/components/ui/button";
 import { can } from "@/lib/permissions";
@@ -27,13 +28,13 @@ export function UserMenu() {
 
   // Chỉ hiện khung chờ lúc chưa có dữ liệu phiên nào, không nháy lại khi đang làm mới.
   if (status === "loading" && session === undefined) {
-    return <div className="h-9 w-40 animate-pulse rounded-md bg-muted" aria-hidden="true" />;
+    return <div className="h-10 w-32 animate-pulse sm:h-9 sm:w-40 rounded-md bg-muted" aria-hidden="true" />;
   }
 
   if (!session) {
     const callbackUrl = pathname === "/login" ? "/dashboard" : pathname;
     return (
-      <Button asChild size="sm">
+      <Button asChild size="sm" className="max-sm:h-10 max-sm:px-4">
         <Link href={`/login?callbackUrl=${encodeURIComponent(callbackUrl)}`}>Đăng nhập</Link>
       </Button>
     );
@@ -41,12 +42,12 @@ export function UserMenu() {
 
   const { name, role } = session.user;
   return (
-    <div className="flex items-center gap-3">
-      <div className="hidden text-right leading-tight sm:block">
-        <p className="text-sm font-semibold">{name}</p>
+    <div className="flex items-center gap-2 sm:gap-3">
+      <div className="min-w-0 text-right leading-tight">
+        <p className="truncate text-sm font-semibold">{name}</p>
         <p className="text-xs text-muted-foreground">{ROLE_LABELS[role]}</p>
       </div>
-      <Button asChild size="sm" variant="ghost">
+      <Button asChild size="sm" variant="ghost" className="hidden sm:inline-flex">
         <Link href="/dashboard">Bảng của tôi</Link>
       </Button>
       {can(role, "deadline:create") && (
@@ -56,11 +57,15 @@ export function UserMenu() {
       )}
       <form
         action={async () => {
-          await logoutAction();
-          window.location.assign("/");
+          try {
+            await logoutAction();
+            window.location.assign("/");
+          } catch {
+            toast.error("Không đăng xuất được. Kiểm tra kết nối mạng rồi thử lại.");
+          }
         }}
       >
-        <Button type="submit" size="sm" variant="outline">
+        <Button type="submit" size="sm" variant="outline" className="max-sm:h-10">
           Đăng xuất
         </Button>
       </form>

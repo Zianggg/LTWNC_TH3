@@ -7,8 +7,8 @@ export default function NotFound() {
   return (
     <>
       <SiteHeader userMenu={<UserMenu />} />
-      <main className="mx-auto flex max-w-xl flex-col items-start px-4 py-24 sm:px-6">
-        <p className="text-7xl font-bold tabular-nums text-muted-foreground/40">404</p>
+      <main id="noi-dung" className="mx-auto flex max-w-xl flex-col items-start px-4 py-24 sm:px-6">
+        <p className="text-7xl font-bold tabular-nums text-muted-foreground/80" aria-hidden="true">404</p>
         <h1 className="mt-4 text-3xl font-bold tracking-tight">Không tìm thấy trang này</h1>
         <p className="mt-3 leading-relaxed text-muted-foreground">
           Deadline hoặc môn học bạn tìm không tồn tại, hoặc đã bị lớp trưởng xoá. Kiểm tra lại đường dẫn, hoặc xem danh sách đầy đủ.

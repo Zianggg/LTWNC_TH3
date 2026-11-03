@@ -67,8 +67,9 @@ export default async function DeadlineDetailPage({ params }: Props) {
         </ol>
       </nav>
 
-      <div className="mt-8 border-l-4 pl-5" style={{ borderColor: subject.color }}>
-        <p className="text-sm font-medium text-muted-foreground">
+      <div className="mt-8">
+        <p className="flex items-center gap-2 text-sm font-medium text-muted-foreground">
+          <span className="size-2.5 rounded-full" style={{ backgroundColor: subject.color }} aria-hidden="true" />
           {DEADLINE_TYPE_LABELS[deadline.type]}, {subject.code}
         </p>
         <h1 className="mt-2 text-3xl font-bold leading-tight tracking-tight text-balance sm:text-4xl">{deadline.title}</h1>

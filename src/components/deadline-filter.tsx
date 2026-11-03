@@ -41,7 +41,7 @@ export function DeadlineFilter({ items, subjects }: { items: FilterItem[]; subje
   return (
     <div className="space-y-5">
       <div className="flex flex-col gap-3 sm:flex-row sm:items-center sm:justify-between">
-        <div className="inline-flex rounded-lg border bg-card p-1" role="group" aria-label="Lọc theo trạng thái">
+        <div className="inline-flex self-start rounded-lg border bg-card p-1" role="group" aria-label="Lọc theo trạng thái">
           {STATUS_OPTIONS.map((option) => (
             <button
               key={option.value}
@@ -49,7 +49,7 @@ export function DeadlineFilter({ items, subjects }: { items: FilterItem[]; subje
               aria-pressed={status === option.value}
               onClick={() => setStatus(option.value)}
               className={cn(
-                "rounded-md px-3 py-1.5 text-sm font-medium transition-colors focus-visible:outline-2 focus-visible:outline-ring",
+                "min-h-10 rounded-md px-3 text-sm font-medium transition-colors sm:min-h-8 focus-visible:outline-2 focus-visible:outline-ring",
                 status === option.value ? "bg-primary text-primary-foreground" : "text-muted-foreground hover:text-foreground",
               )}
             >
@@ -57,12 +57,12 @@ export function DeadlineFilter({ items, subjects }: { items: FilterItem[]; subje
             </button>
           ))}
         </div>
-        <label className="flex items-center gap-2 text-sm text-muted-foreground">
+        <label className="flex min-w-0 items-center gap-2 text-sm text-muted-foreground">
           Môn học
           <select
             value={subject}
             onChange={(e) => setSubject(e.target.value)}
-            className="h-9 rounded-md border bg-card px-3 text-sm text-foreground focus-visible:outline-2 focus-visible:outline-ring"
+            className="h-10 min-w-0 flex-1 rounded-md border bg-card px-3 text-sm text-foreground sm:h-9 sm:flex-none focus-visible:outline-2 focus-visible:outline-ring"
           >
             <option value="all">Tất cả môn</option>
             {subjects.map((s) => (

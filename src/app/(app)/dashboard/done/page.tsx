@@ -20,11 +20,11 @@ export default async function DonePage() {
       <h1 className="text-3xl font-bold tracking-tight">Đã hoàn thành</h1>
       <p className="mt-2 text-muted-foreground">{done.length} deadline bạn đã đánh dấu là xong.</p>
       {done.length > 0 ? (
-        <ul className="mt-8 space-y-3">
+        <ul className="mt-8 space-y-6 sm:space-y-3">
           {done.map(({ deadline, subject }) => (
             <li key={deadline.id} className="flex flex-col gap-2 sm:flex-row sm:items-center">
               <div className="min-w-0 flex-1">
-                <DeadlineCard deadline={deadline} subject={subject} done />
+                <DeadlineCard deadline={deadline} subject={subject} done headingLevel="h2" />
               </div>
               <ToggleDoneButton id={deadline.id} done title={deadline.title} />
             </li>

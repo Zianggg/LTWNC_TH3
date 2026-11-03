@@ -29,7 +29,7 @@ export function Countdown({ dueAt, done = false, className }: { dueAt: string; d
   const tone = days < 0 ? "bg-overdue/10 text-overdue" : days <= 3 ? "bg-soon/10 text-soon" : "bg-later/10 text-later";
 
   return (
-    <span className={cn(base, tone, className)} role="status">
+    <span className={cn(base, tone, className)}>
       {countdownLabel(days)}
     </span>
   );

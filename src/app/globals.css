@@ -79,7 +79,7 @@
   --radius: 0.5rem;
   /* Trạng thái deadline */
   --overdue: #c4161c;
-  --soon: #b45309;
+  --soon: #8f4207;
   --later: #0f766e;
   --done: #64748b;
   --sidebar: #ffffff;
@@ -101,5 +101,26 @@
   }
   html {
     @apply font-sans;
+    accent-color: var(--primary);
+  }
+  ::selection {
+    background: color-mix(in oklab, var(--primary) 18%, transparent);
+  }
+  input,
+  textarea {
+    caret-color: var(--primary);
+  }
+  h1,
+  h2,
+  h3 {
+    text-wrap: balance;
+  }
+  p {
+    text-wrap: pretty;
+  }
+  @media (prefers-reduced-motion: reduce) {
+    .animate-pulse {
+      animation: none;
+    }
   }
 }

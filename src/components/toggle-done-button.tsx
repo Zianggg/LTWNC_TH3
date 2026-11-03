@@ -26,6 +26,7 @@ export function ToggleDoneButton({ id, done, title }: { id: string; done: boolea
       variant={done ? "outline" : "default"}
       onClick={handleClick}
       disabled={pending}
+      className="self-end max-sm:h-10 max-sm:px-4"
       aria-label={`${done ? "Bỏ đánh dấu" : "Đánh dấu đã xong"}: ${title}`}
     >
       {pending ? "Đang lưu…" : done ? "Bỏ đánh dấu" : "Đánh dấu đã xong"}

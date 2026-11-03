@@ -32,7 +32,7 @@ export default async function DashboardPage() {
 
       <h2 className="mt-10 text-xl font-bold tracking-tight">Chưa hoàn thành</h2>
       {pending.length > 0 ? (
-        <ul className="mt-4 space-y-3">
+        <ul className="mt-4 space-y-6 sm:space-y-3">
           {pending.map(({ deadline, subject }) => (
             <li key={deadline.id} className="flex flex-col gap-2 sm:flex-row sm:items-center">
               <div className="min-w-0 flex-1">

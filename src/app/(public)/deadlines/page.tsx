@@ -19,7 +19,7 @@ export default async function DeadlinesPage() {
   const items = deadlines.flatMap((d) => {
     const subject = subjectBySlug.get(d.subjectSlug);
     if (!subject) return [];
-    return [{ id: d.id, subjectSlug: d.subjectSlug, dueAt: d.dueAt, content: <DeadlineCard deadline={d} subject={subject} /> }];
+    return [{ id: d.id, subjectSlug: d.subjectSlug, dueAt: d.dueAt, content: <DeadlineCard deadline={d} subject={subject} headingLevel="h2" /> }];
   });
 
   return (

@@ -8,8 +8,20 @@ const monthPart = new Intl.DateTimeFormat("vi-VN", { timeZone: TIME_ZONE, month:
 const weekdayPart = new Intl.DateTimeFormat("vi-VN", { timeZone: TIME_ZONE, weekday: "long" });
 
 // Một dòng trong "sổ kế hoạch": cột ngày bên trái, nội dung ở giữa, đếm ngược bên phải.
-export function DeadlineCard({ deadline, subject, done }: { deadline: Deadline; subject: Subject; done?: boolean }) {
+export function DeadlineCard({
+  deadline,
+  subject,
+  done,
+  headingLevel = "h3",
+}: {
+  deadline: Deadline;
+  subject: Subject;
+  done?: boolean;
+  /** Cấp tiêu đề theo ngữ cảnh trang để không nhảy cấp (h1 → h3). */
+  headingLevel?: "h2" | "h3";
+}) {
   const due = new Date(deadline.dueAt);
+  const Heading = headingLevel;
   return (
     <article className="group relative grid grid-cols-[4.5rem_1fr] gap-x-4 gap-y-2 rounded-lg border bg-card p-4 transition-colors hover:border-ring/40 sm:grid-cols-[5rem_1fr_auto] sm:items-center">
       <time dateTime={deadline.dueAt} className="row-span-2 flex flex-col items-center border-r pr-4 text-center sm:row-span-1">
@@ -22,11 +34,11 @@ export function DeadlineCard({ deadline, subject, done }: { deadline: Deadline; 
           <span className="size-2.5 shrink-0 rounded-full" style={{ backgroundColor: subject.color }} aria-hidden="true" />
           <span className="truncate">{subject.name}</span>
         </p>
-        <h3 className="mt-1 text-base font-semibold leading-snug text-balance">
+        <Heading className="mt-1 text-base font-semibold leading-snug">
           <Link href={`/deadlines/${deadline.id}`} className="outline-none after:absolute after:inset-0 after:rounded-lg focus-visible:after:ring-2 focus-visible:after:ring-ring">
             {deadline.title}
           </Link>
-        </h3>
+        </Heading>
         <p className="mt-1 text-sm text-muted-foreground">
           {DEADLINE_TYPE_LABELS[deadline.type]}, hạn {formatDue(deadline.dueAt)}
         </p>
